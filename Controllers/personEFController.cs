@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.Data;
 using EntityFramework.Models;
+using System.Diagnostics;
 
 namespace EntityFramework.Controllers
 {   
@@ -55,13 +56,23 @@ namespace EntityFramework.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+
         public async Task<IActionResult> Create([Bind("id,name,identification,gender,age,addres,phone")] person person)
         {
+      
             if (ModelState.IsValid)
             {
-                _context.Add(person);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(person);
+                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex) {
+                    Debug.WriteLine(ex.Message);
+                }
+
             }
             return View(person);
         }

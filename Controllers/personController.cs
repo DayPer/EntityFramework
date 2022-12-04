@@ -25,7 +25,9 @@ namespace EntityFramework.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<person>>> Getperson()
         {
+
             return await _context.person.ToListAsync();
+
         }
 
         // GET: api/people/5

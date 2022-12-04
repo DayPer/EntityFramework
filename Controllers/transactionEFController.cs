@@ -7,27 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EntityFramework.Data;
 using EntityFramework.Models;
-using System.Diagnostics;
 
 namespace EntityFramework.Controllers
 {
-    public class clientEFController : Controller
+    public class transactionEFController : Controller
     {
         private readonly EntityFrameworkContext _context;
 
-        public clientEFController(EntityFrameworkContext context)
+        public transactionEFController(EntityFrameworkContext context)
         {
             _context = context;
         }
 
-        // GET: clientEF
+        // GET: transactionEF
         public async Task<IActionResult> Index()
         {
-            return View(await _context.client.ToListAsync());
+            return View(await _context.transaction.ToListAsync());
         }
 
-
-        // GET: clientEF/Details/5
+        // GET: transactionEF/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,47 +33,39 @@ namespace EntityFramework.Controllers
                 return NotFound();
             }
 
-            var client = await _context.client
+            var transaction = await _context.transaction
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (client == null)
+            if (transaction == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(transaction);
         }
 
-        // GET: clientEF/Create
+        // GET: transactionEF/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: clientEF/Create
+        // POST: transactionEF/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,clientId,password,state")] client client)
+        public async Task<IActionResult> Create([Bind("id,account_number,amount,operation")] transaction transaction)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Add(client);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-
+                _context.Add(transaction);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(client);
+            return View(transaction);
         }
 
-        // GET: clientEF/Edit/5
+        // GET: transactionEF/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,22 +73,22 @@ namespace EntityFramework.Controllers
                 return NotFound();
             }
 
-            var client = await _context.client.FindAsync(id);
-            if (client == null)
+            var transaction = await _context.transaction.FindAsync(id);
+            if (transaction == null)
             {
                 return NotFound();
             }
-            return View(client);
+            return View(transaction);
         }
 
-        // POST: clientEF/Edit/5
+        // POST: transactionEF/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,clientId,password,state")] client client)
+        public async Task<IActionResult> Edit(int id, [Bind("id,account_number,amount,operation")] transaction transaction)
         {
-            if (id != client.id)
+            if (id != transaction.id)
             {
                 return NotFound();
             }
@@ -107,12 +97,12 @@ namespace EntityFramework.Controllers
             {
                 try
                 {
-                    _context.Update(client);
+                    _context.Update(transaction);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!clientExists(client.id))
+                    if (!transactionExists(transaction.id))
                     {
                         return NotFound();
                     }
@@ -123,10 +113,10 @@ namespace EntityFramework.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(client);
+            return View(transaction);
         }
 
-        // GET: clientEF/Delete/5
+        // GET: transactionEF/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,37 +124,30 @@ namespace EntityFramework.Controllers
                 return NotFound();
             }
 
-            var client = await _context.client
+            var transaction = await _context.transaction
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (client == null)
+            if (transaction == null)
             {
                 return NotFound();
             }
 
-            return View(client);
+            return View(transaction);
         }
 
-        // POST: clientEF/Delete/5
+        // POST: transactionEF/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                var client = await _context.client.FindAsync(id);
-                _context.client.Remove(client);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex) {
-                Debug.WriteLine(ex.Message);
-            }
-
+            var transaction = await _context.transaction.FindAsync(id);
+            _context.transaction.Remove(transaction);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool clientExists(int id)
+        private bool transactionExists(int id)
         {
-            return _context.client.Any(e => e.id == id);
+            return _context.transaction.Any(e => e.id == id);
         }
     }
 }
