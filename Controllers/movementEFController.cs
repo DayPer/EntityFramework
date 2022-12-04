@@ -19,13 +19,13 @@ namespace EntityFramework.Controllers
             _context = context;
         }
 
-        // GET: movement
+        // GET: movementEF
         public async Task<IActionResult> Index()
         {
             return View(await _context.movement.ToListAsync());
         }
 
-        // GET: movement/Details/5
+        // GET: movementEF/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,18 +43,18 @@ namespace EntityFramework.Controllers
             return View(movement);
         }
 
-        // GET: movement/Create
+        // GET: movementEF/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: movement/Create
+        // POST: movementEF/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,clientid,date,movement_type,value,balance")] movement movement)
+        public async Task<IActionResult> Create([Bind("id,date,clientid,account_number,account_type,movement_type,amount,balance,state,start_balance")] movement movement)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace EntityFramework.Controllers
             return View(movement);
         }
 
-        // GET: movement/Edit/5
+        // GET: movementEF/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +81,12 @@ namespace EntityFramework.Controllers
             return View(movement);
         }
 
-        // POST: movement/Edit/5
+        // POST: movementEF/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,clientid,date,movement_type,value,balance")] movement movement)
+        public async Task<IActionResult> Edit(int id, [Bind("id,date,clientid,account_number,account_type,movement_type,amount,balance,state,start_balance")] movement movement)
         {
             if (id != movement.id)
             {
@@ -116,7 +116,7 @@ namespace EntityFramework.Controllers
             return View(movement);
         }
 
-        // GET: movement/Delete/5
+        // GET: movementEF/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace EntityFramework.Controllers
             return View(movement);
         }
 
-        // POST: movement/Delete/5
+        // POST: movementEF/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

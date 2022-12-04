@@ -11,16 +11,28 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.clientid)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.clientid)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.date)
+            @Html.DisplayNameFor(model => model.account_number)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.date)
+            @Html.DisplayFor(model => model.account_number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.account_type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.account_type)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.movement_type)
@@ -29,10 +41,10 @@
             @Html.DisplayFor(model => model.movement_type)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.value)
+            @Html.DisplayNameFor(model => model.amount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.value)
+            @Html.DisplayFor(model => model.amount)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.balance)
@@ -40,9 +52,20 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.balance)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.start_balance)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.start_balance)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
