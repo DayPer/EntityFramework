@@ -1,0 +1,54 @@
+﻿@model IEnumerable<EntityFramework.Models.movement>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Report Movements</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.clientid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.movement_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.balance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.clientid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.movement_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.balance)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
