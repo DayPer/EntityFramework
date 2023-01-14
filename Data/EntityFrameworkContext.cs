@@ -18,6 +18,10 @@ namespace EntityFramework.Data
 
         public DbSet<EntityFramework.Models.person> person { get; set; }
 
+        public DbSet<EntityFramework.Models.productos> productos { get; set; }
+
+        public DbSet<EntityFramework.Models.usuarios> usuarios { get; set; }
+
 
     }
 }
