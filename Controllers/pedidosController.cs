@@ -8,52 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using EntityFramework.Data;
 using EntityFramework.Models;
 
-namespace EntityFramework.Controllers
+namespace Api_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class accountController : ControllerBase
+    public class pedidosController : ControllerBase
     {
         private readonly EntityFrameworkContext _context;
 
-        public accountController(EntityFrameworkContext context)
+        public pedidosController(EntityFrameworkContext context)
         {
             _context = context;
         }
 
-        // GET: api/account
+        // GET: api/pedidos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<account>>> Getaccount()
+        public async Task<ActionResult<IEnumerable<pedidos>>> Getpedidos()
         {
-            return await _context.account.ToListAsync();
+            return await _context.pedidos.ToListAsync();
         }
 
-        // GET: api/account/5
+        // GET: api/pedidos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<account>> Getaccount(int id)
+        public async Task<ActionResult<pedidos>> Getpedidos(int id)
         {
-            var account = await _context.account.FindAsync(id);
+            var pedidos = await _context.pedidos.FindAsync(id);
 
-            if (account == null)
+            if (pedidos == null)
             {
                 return NotFound();
             }
 
-            return account;
+            return pedidos;
         }
 
-        // PUT: api/account/5
+        // PUT: api/pedidos/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putaccount(int id, account account)
+        public async Task<IActionResult> Putpedidos(int id, pedidos pedidos)
         {
-            if (id != account.id)
+            if (id != pedidos.PedID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(account).State = EntityState.Modified;
+            _context.Entry(pedidos).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace EntityFramework.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!accountExists(id))
+                if (!pedidosExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace EntityFramework.Controllers
             return NoContent();
         }
 
-        // POST: api/account
+        // POST: api/pedidos
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<account>> Postaccount(account account)
+        public async Task<ActionResult<pedidos>> Postpedidos(pedidos pedidos)
         {
-            _context.account.Add(account);
+            _context.pedidos.Add(pedidos);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getaccount", new { id = account.id }, account);
+            return CreatedAtAction("Getpedidos", new { id = pedidos.PedID }, pedidos);
         }
 
-        // DELETE: api/account/5
+        // DELETE: api/pedidos/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<account>> Deleteaccount(int id)
+        public async Task<ActionResult<pedidos>> Deletepedidos(int id)
         {
-            var account = await _context.account.FindAsync(id);
-            if (account == null)
+            var pedidos = await _context.pedidos.FindAsync(id);
+            if (pedidos == null)
             {
                 return NotFound();
             }
 
-            _context.account.Remove(account);
+            _context.pedidos.Remove(pedidos);
             await _context.SaveChangesAsync();
 
-            return account;
+            return pedidos;
         }
 
-        private bool accountExists(int id)
+        private bool pedidosExists(int id)
         {
-            return _context.account.Any(e => e.id == id);
+            return _context.pedidos.Any(e => e.PedID == id);
         }
     }
 }

@@ -14,14 +14,10 @@ namespace EntityFramework.Data
         {
         }
 
-        public DbSet<EntityFramework.Models.movement> movement { get; set; }
+        public DbSet<EntityFramework.Models.pedidos> pedidos { get; set; }
 
         public DbSet<EntityFramework.Models.person> person { get; set; }
 
-        public DbSet<EntityFramework.Models.account> account { get; set; }
 
-        public DbSet<EntityFramework.Models.client> client { get; set; }
-
-        public DbSet<EntityFramework.Models.transaction> transaction { get; set; }
     }
 }
